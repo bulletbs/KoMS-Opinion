@@ -1,42 +1,41 @@
 <?php defined('SYSPATH') or die('No direct script access.');?>
 
-<b>Ответы</b>
 <div id="opinionVariants">
+    <b>Ответы</b>
     <div id="variantsList">
-        <?foreach($model->variants->find_all() as $variant):?>
-            <div>
-                <?=Form::input('variants['.$variant->id.']', $variant->title, array('class'=>'span2'))?>&nbsp;
-                <?= Form::button('del','X',array('class'=>'del btn', 'data-id'=>$variant->id))?><br>
+        <?foreach($model->variants->order_by('ordr', 'ASC')->find_all() as $variant):?>
+            <div class="form-group">
+                <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                <?=Form::input('variants['.$variant->id.']', $variant->title, array('class'=>'input-sm'))?>
+                <?= Form::button('del ','X',array('class'=>'del btn btn-danger input-sm', 'data-id'=>$variant->id))?><br>
             </div>
         <?endforeach;?>
+        <?= Form::input('add', __('Add').' '.__('variant'), array('class'=>'addButton  btn btn-primary', 'type'=>'button'))?>
     </div>
     <br>
-    <?= Form::input('add', __('Add').' '.__('variant'), array('class'=>'addButton', 'type'=>'button'))?>
 </div>
 <div id="deletedVariants"></div>
 
 <script type="text/javascript">
-    variantHtml = '<div>\
-    <?= Form::input('newVariants[]', '', array('class'=>'span2'))?>&nbsp;\
-    <?= Form::button('del','X',array('class'=>'del btn'))?><br>\
+    var newCounter = -1;
+    var deletedVariantHtml = '<?= Form::hidden('deleted[]', 'variantKey') ?>';
+    var variantHtml = '<div class="form-group">\
+    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>\
+    <?= Form::input('variants[\'+ newCounter +\']', '', array('class'=>'input-sm'))?>\
+    <?= Form::button('del','X',array('class'=>'del btn  btn-danger input-sm'))?><br>\
 </div>';
-var deletedVariantHtml = '<?= Form::hidden('deleted[]', 'variantKey') ?>';
 
 $(document).ready(function(){
-    /**
-     * Options List events
-     * @type {*|jQuery|HTMLElement}
-     */
+    $("#variantsList").sortable({
+        cursor:'move'
+    });
     $('#opinionVariants').on('click', '.addButton',function(){
-        var content = variantHtml;
-        if($(this).data('id') > 0)
-            content = content.replace('PARENT_ID', $(this).data('id'));
-        $(this).before(content);
+        $(this).before(variantHtml.replace('PARENT_ID', $(this).data('id')));
+        newCounter--;
     });
     $('#opinionVariants').on('click', '.del', function(){
-        var id = $(this).data('id');
-        if(id)
-            $('#deletedVariants').append(deletedVariantHtml.replace('variantKey', id));
+        if($(this).data('id'))
+            $('#deletedVariants').append(deletedVariantHtml.replace('variantKey', $(this).data('id')));
         $(this).parent().remove();
     });
 });

@@ -10,4 +10,14 @@ class Model_OpinionVariant extends ORM{
             'foreign_key' => 'opinion_id',
         ),
     );
+
+    /**
+     * Calculate percent
+     * @param $total
+     * @return mixed
+     */
+    public function calculatePercent($total){
+        $percent = round($this->amount / $total*100,2);
+        return str_replace(',', '.', $percent);
+    }
 }

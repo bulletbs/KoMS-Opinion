@@ -64,6 +64,13 @@ class Controller_Admin_Opinion extends Controller_Admin_Crud
         parent::action_index();
     }
 
+    public function action_edit()
+    {
+        $this->styles[] = 'media/libs/jquery-ui-1.12.0/jquery-ui.min.css';
+        $this->scripts[] = 'media/libs/jquery-ui-1.12.0/jquery-ui.min.js';
+        parent::action_edit();
+    }
+
     /**
      * Form preloader
      * @param $model
@@ -85,14 +92,18 @@ class Controller_Admin_Opinion extends Controller_Admin_Crud
         $model->values($_POST)->save();
 
         /* Save New Options */
-        foreach(Arr::get($_POST,'newVariants', array()) as $variant){
-            $newOption = ORM::factory('OpinionVariant')->values(array('title'=>$variant, 'opinion_id'=>$model->id));
-            $newOption->save();
-        }
+//        foreach(Arr::get($_POST,'newVariants', array()) as $_k=>$variant){
+//            $newOption = ORM::factory('OpinionVariant')->values(array('title'=>$variant, 'opinion_id'=>$model->id));
+//            $newOption->save();
+//        }
         /* Save Present Options */
+        $variant_ordr = 0;
         foreach(Arr::get($_POST,'variants', array()) as $k=>$variant){
-            $option = ORM::factory('OpinionVariant', $k)->values(array('title'=>$variant));
-            $option->update();
+            $option = ORM::factory('OpinionVariant', $k>0 ? $k : NULL)->values(array(
+                'opinion_id'=>$model->id,
+                'title'=>$variant,
+                'ordr'=>$variant_ordr++,
+            ))->save();
         }
         /* Delete Options */
         foreach(Arr::get($_POST,'deleted', array()) as $variant)

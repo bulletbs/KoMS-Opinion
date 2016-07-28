@@ -1,0 +1,84 @@
+/* results */
+.opinion_variants{
+    width: 500px;
+}
+.opinion_variants h3{
+    font-size: 16px;
+}
+.opinion_variants hr{
+    background: #aeaeae;
+    height: 1px;
+    border: 0;
+}
+.opinion_variants .opinion_description{
+    font-size: 12px;
+    color: #999;
+    margin: 8px 0;
+}
+.opinion_variants .opinion_description a{
+    margin-left: 10px;
+}
+.opinion_variants .opinion_description span{
+    color: #f00;
+    padding-left: 20px;
+}
+.opinion_variants ul{
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 3px;
+}
+.opinion_variants   ul:nth-child(2n+1){
+    /*background: #f0f0f0;*/
+}
+.opinion_variants ul:after{
+    content: " ";
+    display: block;
+    clear: both;
+}
+.opinion_variants li{
+    margin: 0;
+}
+.opinion_variants li.title{
+    width: 70%;
+    float: left;
+    font-size: 13px;
+}
+.opinion_variants li.percent{
+    width: 13%;
+    float: left;
+    line-height: 18px;
+    font-size: 11px;
+    font-weight: bold;
+}
+.opinion_variants .amount{
+    font-size: 11px;
+    color: #999;
+}
+.opinion_variants li.graph{
+    width: 87%;
+    clear: both;
+    margin-left: 15px;
+}
+.opinion_variants li.graph div{
+    border: 1px solid #001057;
+    box-shadow: #0a001f 1px 1px 5px;
+    background: #0070B7;
+    margin-top: 6px;
+    height: 3px;
+    color: #fff;
+    margin-right: 5px;
+    float: left;
+}
+
+/*statistics*/
+.stat1td {white-space:nowrap; background-color:#FFFFFF; padding-right:8px; width:90%;}
+.stat2td {font:18px Tahoma,Arial,Helvetica; white-space:nowrap; background-color:#FFFFFF; color:#0463BC; text-align:right;}
+
+h5 {font:bold 14px Arial,Helvetica; margin-bottom:6px; margin-top:14px;}
+.cat_vote {font:11px Tahoma,Arial,Helvetica; color:#777777; padding-bottom:8px;}
+.cat_vote a {color:#777777;}
+
+input#btn_ans {font:11px Tahoma,Arial,Helvetica; cursor:pointer; color:#FFFFFF; border:none; width:78px; height:19px; background-color:#3991CB; background-image:url(vote/btnbk_vote_ans2.gif); padding-bottom:4px;}
+input#btn_res {font:11px Tahoma,Arial,Helvetica; cursor:pointer; color:#FFFFFF; border:none; width:88px; height:19px; background-color:#3991CB; background-image:url(vote/btnbk_vote_res_gray.gif); padding-bottom:4px;}
+input#btn_ans, input#btn_res {_padding-bottom:2px;}
+input.rad {margin-top:0px; height:24px; padding-right:8px;}
